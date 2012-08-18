@@ -1,0 +1,34 @@
+
+class Module
+  def self.new (&block)
+      if block != nil then instance_eval(&block) end
+      self
+    end
+
+   def new (&block)
+      if block != nil then instance_eval(&block) end
+      self
+   end
+ 
+  def attribute (name)
+      
+        define_method "#{name}=".to_sym do |arg|
+        instance_variable_set("@#{name}",arg)
+       
+      end
+     
+     define_method "#{name}?".to_sym do 
+       if instance_variable_get("@#{name}") != nil then true
+                                               else false
+                                               end 
+      
+      end 
+
+      define_method name.to_sym do 
+          instance_variable_get("@#{name}")
+       
+       end  
+
+  end
+end
+
